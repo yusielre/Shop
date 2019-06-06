@@ -29,13 +29,11 @@ namespace Shop.Web.Migrations
 
                     b.Property<bool>("IsAvailabe");
 
-                    b.Property<DateTime?>("LastPurchase");
+                    b.Property<DateTime>("LastPurchase");
 
-                    b.Property<DateTime?>("LastSale");
+                    b.Property<DateTime>("LastSale");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                    b.Property<string>("Name");
 
                     b.Property<decimal>("Price");
 
