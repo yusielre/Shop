@@ -1,6 +1,4 @@
-﻿
-
-namespace Shop.Web
+﻿namespace Shop.Web
 {
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -45,6 +43,7 @@ namespace Shop.Web
 
             services.AddTransient<SeedDb>();
             services.AddScoped<IRepository, Repository>();
+
             services.AddScoped<IUserHelper, UserHelper>();
 
 
