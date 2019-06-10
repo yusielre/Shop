@@ -16,7 +16,7 @@
         [HttpGet]
         public IActionResult GetProduct()
         {
-            return Ok(this.productRepository.GetAll());
+            return Ok(this.productRepository.GetAllWithUsers());
         }
     }
 }
