@@ -19,9 +19,9 @@
                     <DataTemplate>
                         <ViewCell>
                             <Grid>
-                                <Grid.GestureRecognizers>
+                                <!--<Grid.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding SelectProductCommand}"/>
-                                </Grid.GestureRecognizers>
+                                </Grid.GestureRecognizers>-->
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>

@@ -6,6 +6,9 @@
     using Models;
     using Newtonsoft.Json;
     using System.Threading.Tasks;
+    using System.Net;
+    using System.Security.Cryptography.X509Certificates;
+    using System.Net.Security;
 
     public class ApiService
     {
@@ -13,6 +16,13 @@
         {
             try
             {
+                //TODO: Quitar al publicar hacer posible un request de una página que no tenga seguridad en el certificado SSL
+                ServicePointManager.ServerCertificateValidationCallback =
+                    delegate (object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+                    {
+                        return true;
+                    };
+
                 var client = new HttpClient
                 {
                     BaseAddress = new Uri(urlBase)
