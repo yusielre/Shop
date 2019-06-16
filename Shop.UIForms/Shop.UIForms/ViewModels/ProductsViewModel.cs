@@ -20,13 +20,14 @@
 
         public ObservableCollection<Product> Products
         {
-            get => this.products;
-            set => this.SetValue(ref this.products, value);
+            get { return this.products; }
+            set { this.SetValue(ref this.products, value); }
         }
 
 
         public ProductsViewModel()
         {
+            this.apiService = new ApiService();
             this.LoadProducts();
         }
 
@@ -35,7 +36,7 @@
             this.IsRefreshing = true;
 
             var response = await this.apiService.GetListAsync<Product>(
-                "https://192.168.1.4",
+                "https://192.168.43.243",
                 "/api",
                 "/Products");
 

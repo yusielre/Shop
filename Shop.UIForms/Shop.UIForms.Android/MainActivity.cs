@@ -1,10 +1,6 @@
-﻿using System;
-
+﻿
 using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
 
 namespace Shop.UIForms.Droid
@@ -14,6 +10,11 @@ namespace Shop.UIForms.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            //System.Net.ServicePointManager.ServerCertificateValidationCallback +=
+            //     (sender, cert, chain, sslPolicyErrors) => true;
+
+            //System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
