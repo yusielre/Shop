@@ -55,7 +55,6 @@
             return this.View(model);
         }
 
-
         public async Task<IActionResult> Logout()
         {
             await this.userHelper.LogoutAsync();
@@ -230,6 +229,13 @@
 
             return this.BadRequest();
         }
+
+        public IActionResult NotAuthorized()
+        {
+            return this.View();
+        }
+
+
 
     }
 }
