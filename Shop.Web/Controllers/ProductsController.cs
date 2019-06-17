@@ -14,6 +14,7 @@
 
     [Authorize]
     public class ProductsController : Controller
+
     {
         private readonly IProductRepository productRepository;
         private readonly IUserHelper userHelper;
