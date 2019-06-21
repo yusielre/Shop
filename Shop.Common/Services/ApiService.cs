@@ -13,11 +13,9 @@
         {
             try
             {
-                
+                var client = new HttpClient(new HttpClientHandler());
 
-                var client = new HttpClient{ BaseAddress = new Uri(urlBase)};
-
-                var response = await client.GetAsync(servicePrefix + controller);
+                var response = await client.GetAsync(urlBase+servicePrefix + controller);
 
                 var result = await response.Content.ReadAsStringAsync();
 
