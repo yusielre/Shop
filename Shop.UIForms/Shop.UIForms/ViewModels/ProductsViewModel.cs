@@ -36,7 +36,7 @@
             this.IsRefreshing = true;
 
             var response = await this.apiService.GetListAsync<Product>(
-                "https://192.168.43.243",
+                "https://192.168.1.3:543",
                 "/api",
                 "/Products");
 
