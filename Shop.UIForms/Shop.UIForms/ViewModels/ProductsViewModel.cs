@@ -20,8 +20,8 @@
 
         public ObservableCollection<Product> Products
         {
-            get { return this.products; }
-            set { this.SetValue(ref this.products, value); }
+            get => this.products;
+            set => this.SetValue(ref this.products, value);
         }
 
 

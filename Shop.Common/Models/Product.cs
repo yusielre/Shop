@@ -1,6 +1,7 @@
 ﻿namespace Shop.Common.Models
 {
     using Newtonsoft.Json;
+    using System;
 
     public class Product
     {
@@ -32,7 +33,7 @@
         public User User { get; set; }
 
         [JsonProperty("imageFullPath")]
-        public object ImageFullPath { get; set; }
+        public Uri ImageFullPath { get; set; }
 
         public override string ToString()
         {

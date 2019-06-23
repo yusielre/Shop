@@ -40,7 +40,7 @@
                     return null;
                 }
 
-                return $"https://localhost:44393{this.ImageUrl.Substring(1)}";
+                return $"https://192.168.1.3:543{this.ImageUrl.Substring(1)}";
             }
         }
 
