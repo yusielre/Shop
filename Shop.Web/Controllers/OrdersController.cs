@@ -20,6 +20,13 @@
             var model = await orderRepository.GetOrdersAsync(this.User.Identity.Name);
             return View(model);
         }
+
+        public async Task<IActionResult> Create()
+        {
+            var model = await this.orderRepository.GetDetailTempsAsync(this.User.Identity.Name);
+            return this.View(model);
+        }
+
     }
 
 }

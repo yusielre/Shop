@@ -25,6 +25,14 @@
                 .Property(p => p.Price)
                 .HasColumnType("decimal(18,2)");
 
+            modelBuilder.Entity<OrderDetailTemp>()
+                .Property(p => p.Price)
+                .HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<OrderDetail>()
+                .Property(p => p.Price)
+                .HasColumnType("decimal(18,2)");
+
             var cascadeFKs = modelBuilder.Model
                 .G­etEntityTypes()
                 .SelectMany(t => t.GetForeignKeys())

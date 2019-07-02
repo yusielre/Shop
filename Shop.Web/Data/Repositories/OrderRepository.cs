@@ -39,6 +39,23 @@
                 .Where(o => o.User == user)
                 .OrderByDescending(o => o.OrderDate);
         }
+
+        public async Task<IQueryable<OrderDetailTemp>> GetDetailTempsAsync(string userName)
+        {
+            var user = await this.userHelper.GetUserByEmailAsync(userName);
+            if (user == null)
+            {
+                return null;
+            }
+
+           return this.context.OrderDetailTemps
+                .Include(o => o.Product)
+                .Where(o => o.User == user)
+                .OrderBy(o => o.Product.Name);
+
+          
+        }
+
     }
 
 }
