@@ -11,7 +11,7 @@
         [Required]
         public string Name { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
+        
         public decimal Price { get; set; }
 
         [Display(Name = "Image")]
@@ -40,7 +40,7 @@
                     return null;
                 }
 
-                return $"https://localhost:44393{this.ImageUrl.Substring(1)}";
+                return $"https://192.168.1.3:543{this.ImageUrl.Substring(1)}";
             }
         }
 

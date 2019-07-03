@@ -1,6 +1,7 @@
 ﻿namespace Shop.Web.Data.Entities
 {
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class OrderDetailTemp : IEntity
     {
@@ -12,7 +13,8 @@
         [Required]
         public Product Product { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:C2}")]
+        [Column(TypeName = "decimal(18,2)")]
+        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
         public decimal Price { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:N2}")]

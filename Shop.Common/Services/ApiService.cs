@@ -9,13 +9,18 @@
 
     public class ApiService
     {
+
+
         public async Task<Response> GetListAsync<T>(string urlBase, string servicePrefix, string controller)
         {
+
             try
             {
+
+
                 var client = new HttpClient(new HttpClientHandler());
 
-                var response = await client.GetAsync(urlBase+servicePrefix + controller);
+                var response = await client.GetAsync(urlBase + servicePrefix + controller);
 
                 var result = await response.Content.ReadAsStringAsync();
 
@@ -46,4 +51,6 @@
         }
 
     }
+
+
 }

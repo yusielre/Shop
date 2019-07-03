@@ -1,5 +1,8 @@
 ﻿namespace Shop.Web
 {
+    using Data;
+    using Data.Entities;
+    using Helpers;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -8,9 +11,6 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Data;
-    using Data.Entities;
-    using Helpers;
     using Microsoft.IdentityModel.Tokens;
     using System.Text;
 
