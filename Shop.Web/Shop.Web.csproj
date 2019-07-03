@@ -6,6 +6,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\**" />
+    <Content Remove="Migrations\**" />
+    <EmbeddedResource Remove="Migrations\**" />
+    <None Remove="Migrations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Migrations\20190703124614_OrderDetalTemp.cs" />
+    <Compile Include="Migrations\20190703124614_OrderDetalTemp.Designer.cs" />
+    <Compile Include="Migrations\DataContextModelSnapshot.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="wwwroot\node_modules\font-awesome\css\font-awesome.css" />
     <Content Include="wwwroot\node_modules\font-awesome\css\font-awesome.min.css" />
     <Content Include="wwwroot\node_modules\font-awesome\fonts\fontawesome-webfont.eot" />

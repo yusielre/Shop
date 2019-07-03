@@ -10,8 +10,8 @@ using Shop.Web.Data;
 namespace Shop.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190702173441_Pricedecimal")]
-    partial class Pricedecimal
+    [Migration("20190703124614_OrderDetalTemp")]
+    partial class OrderDetalTemp
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
