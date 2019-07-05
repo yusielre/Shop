@@ -1,12 +1,12 @@
 ﻿namespace Shop.Web.Data
 {
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
     using Entities;
     using Helpers;
     using Microsoft.EntityFrameworkCore;
     using Shop.Web.Models;
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     public class OrderRepository : GenericRepository<Order>, IOrderRepository
     {
@@ -51,12 +51,12 @@
                 return null;
             }
 
-           return this.context.OrderDetailTemps
-                .Include(o => o.Product)
-                .Where(o => o.User == user)
-                .OrderBy(o => o.Product.Name);
+            return this.context.OrderDetailTemps
+                 .Include(o => o.Product)
+                 .Where(o => o.User == user)
+                 .OrderBy(o => o.Product.Name);
 
-          
+
         }
 
         public async Task AddItemToOrderAsync(AddItemViewModel model, string userName)
@@ -162,6 +162,25 @@
             await this.context.SaveChangesAsync();
             return true;
         }
+
+        public async Task DeliverOrder(DeliverViewModel model)
+        {
+            var order = await this.context.Orders.FindAsync(model.Id);
+            if (order == null)
+            {
+                return;
+            }
+
+            order.DeliveryDate = model.DeliveryDate;
+            this.context.Orders.Update(order);
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task<Order> GetOrdersAsync(int id)
+        {
+            return await this.context.Orders.FindAsync(id);
+        }
+
 
 
     }
