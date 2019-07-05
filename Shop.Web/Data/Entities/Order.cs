@@ -16,7 +16,7 @@
 
         [Display(Name = "Delivery date")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
-        public DateTime? DeliveryDate { get; set; }
+        public DateTime DeliveryDate { get; set; }
 
         [Required]
         public User User { get; set; }
@@ -32,6 +32,34 @@
 
         [DisplayFormat(DataFormatString = "{0:C2}")]
         public decimal Value { get { return this.Items == null ? 0 : this.Items.Sum(i => i.Value); } }
+
+        [Display(Name = "Order date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
+        public DateTime? OrderDateLocal
+        {
+            get
+            {
+                if (this.OrderDate==null)
+                {
+                    return null;
+                }
+                return this.OrderDate.ToLocalTime();
+            }
+        }
+
+        [Display(Name = "Delivery date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
+        public DateTime? DeliveryDateLocal
+        {
+            get
+            {
+                if (this.DeliveryDate == null)
+                {
+                    return null;
+                }
+                return this.DeliveryDate.ToLocalTime();
+            }
+        }
     }
 
 }

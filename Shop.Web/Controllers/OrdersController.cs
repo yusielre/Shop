@@ -56,6 +56,39 @@
             return this.View(model);
         }
 
+        public async Task<IActionResult> Increase(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            await this.orderRepository.ModifyOrderDetailTempQuantityAsync(id.Value, 1);
+            return this.RedirectToAction("Create");
+        }
+
+        public async Task<IActionResult> Decrease(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            await this.orderRepository.ModifyOrderDetailTempQuantityAsync(id.Value, -1);
+            return this.RedirectToAction("Create");
+        }
+
+        public async Task<IActionResult> DeleteItem(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            await this.orderRepository.DeleteDetailTempAsync(id.Value);
+            return this.RedirectToAction("Create");
+        }
+
         public async Task<IActionResult> ConfirmOrder()
         {
             var response = await this.orderRepository.ConfirmOrderAsync(this.User.Identity.Name);
