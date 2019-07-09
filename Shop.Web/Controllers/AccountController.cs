@@ -20,12 +20,14 @@
         private readonly IUserHelper userHelper;
         private readonly IConfiguration configuration;
         private readonly ICountryRepository countryRepository;
+        private readonly IMailHelper mailHelper;
 
-        public AccountController(IUserHelper userHelper, IConfiguration configuration, ICountryRepository countryRepository)
+        public AccountController(IUserHelper userHelper, IConfiguration configuration, ICountryRepository countryRepository, IMailHelper mailHelper)
         {
             this.userHelper = userHelper;
             this.configuration = configuration;
             this.countryRepository = countryRepository;
+            this.mailHelper = mailHelper;
         }
 
         public IActionResult Login()
@@ -84,6 +86,7 @@
                 if (user == null)
                 {
                     var city = await this.countryRepository.GetCityAsync(model.CityId);
+
                     user = new User
                     {
                         FirstName = model.FirstName,
@@ -103,22 +106,17 @@
                         return this.View(model);
                     }
 
-
-                    var loginViewModel = new LoginViewModel
+                    var myToken = await this.userHelper.GenerateEmailConfirmationTokenAsync(user);
+                    var tokenLink = this.Url.Action("ConfirmEmail", "Account", new
                     {
-                        Password = model.Password,
-                        RememberMe = false,
-                        Username = model.Username
-                    };
+                        userid = user.Id,
+                        token = myToken
+                    }, protocol: HttpContext.Request.Scheme);
 
-                    var result2 = await this.userHelper.LoginAsync(loginViewModel);
-
-                    if (result2.Succeeded)
-                    {
-                        return this.RedirectToAction("Index", "Home");
-                    }
-
-                    this.ModelState.AddModelError(string.Empty, "The user couldn't be login.");
+                    this.mailHelper.SendMail(model.Username, "Email confirmation", $"<h1>Email Confirmation</h1>" +
+                        $"To allow the user, " +
+                        $"plase click in this link:</br></br><a href = \"{tokenLink}\">Confirm Email</a>");
+                    this.ViewBag.Message = "The instructions to allow your user has been sent to email.";
                     return this.View(model);
                 }
 
@@ -281,6 +279,27 @@
             return this.Json(country.Cities.OrderBy(c => c.Name));
         }
 
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(token))
+            {
+                return this.NotFound();
+            }
+
+            var user = await this.userHelper.GetUserByIdAsync(userId);
+            if (user == null)
+            {
+                return this.NotFound();
+            }
+
+            var result = await this.userHelper.ConfirmEmailAsync(user, token);
+            if (!result.Succeeded)
+            {
+                return this.NotFound();
+            }
+
+            return View();
+        }
 
     }
 }

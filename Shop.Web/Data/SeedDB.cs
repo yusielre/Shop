@@ -43,44 +43,10 @@
                 await this.context.SaveChangesAsync();
             }
 
-            var user = await this.userHelper.GetUserByEmailAsync("yusiel.re@gmail.com");
+            var user = await this.userHelper.GetUserByEmailAsync("fiorella@gmail.com");
             if (user == null)
             {
                 user = new User
-                {
-                    FirstName = "Yusiel",
-                    LastName = "Rodríguez",
-                    Email = "yusiel.re@gmail.com",
-                    UserName = "yusiel.re@gmail.com",
-                    PhoneNumber = "093370777",
-                    Address = "25 de mayo 695",
-                    CityId = this.context.Countries.FirstOrDefault().Cities.FirstOrDefault().Id,
-                    City = this.context.Countries.FirstOrDefault().Cities.FirstOrDefault()
-
-                };
-
-                var result = await this.userHelper.AddUserAsync(user, "123456");
-                if (result != IdentityResult.Success)
-                {
-                    throw new InvalidOperationException("Could not create the user in seeder");
-                }
-
-                await this.userHelper.AddUserToRoleAsync(user, "Admin");
-            }
-
-            var isInRole = await this.userHelper.IsUserInRoleAsync(user, "Admin");
-            if (!isInRole)
-            {
-                await this.userHelper.AddUserToRoleAsync(user, "Admin");
-            }
-
-
-
-
-            var user2 = await this.userHelper.GetUserByEmailAsync("fiorella@gmail.com");
-            if (user2 == null)
-            {
-                user2 = new User
                 {
                     FirstName = "Fiorella",
                     LastName = "Fornesi",
@@ -92,19 +58,22 @@
                     City = this.context.Countries.FirstOrDefault().Cities.FirstOrDefault()
                 };
 
-                var result = await this.userHelper.AddUserAsync(user2, "123456");
+                var result = await this.userHelper.AddUserAsync(user, "123456");
                 if (result != IdentityResult.Success)
                 {
                     throw new InvalidOperationException("Could not create the user in seeder");
                 }
 
-                await this.userHelper.AddUserToRoleAsync(user2, "Customer");
+                await this.userHelper.AddUserToRoleAsync(user, "Admin");
+                var token = await this.userHelper.GenerateEmailConfirmationTokenAsync(user);
+                await this.userHelper.ConfirmEmailAsync(user, token);
+
             }
 
-            var isInRole2 = await this.userHelper.IsUserInRoleAsync(user2, "Customer");
-            if (!isInRole2)
+            var isInRole = await this.userHelper.IsUserInRoleAsync(user, "Admin");
+            if (!isInRole)
             {
-                await this.userHelper.AddUserToRoleAsync(user2, "Customer");
+                await this.userHelper.AddUserToRoleAsync(user, "Admin");
             }
 
             var user3 = await this.userHelper.GetUserByEmailAsync("mario@gmail.com");
@@ -129,6 +98,9 @@
                 }
 
                 await this.userHelper.AddUserToRoleAsync(user3, "Customer");
+                var token3 = await this.userHelper.GenerateEmailConfirmationTokenAsync(user3);
+                await this.userHelper.ConfirmEmailAsync(user3, token3);
+
             }
 
             var isInRole3 = await this.userHelper.IsUserInRoleAsync(user3, "Customer");
