@@ -8,7 +8,11 @@
              x:Class="Shop.UIForms.App">
     <Application.Resources>
         <ResourceDictionary>
+            <!-- Locator -->
             <infra:InstanceLocator x:Key="Locator"/>
+            
+            <!-- Parameters -->
+            <x:String x:Key="UrlAPI">https://192.168.1.3:543</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
